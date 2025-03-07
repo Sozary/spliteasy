@@ -1,13 +1,15 @@
 import { MainLayout } from "./features/layouts/MainLayout"
 import { Toaster } from 'react-hot-toast';
-import SignUpPage from "./features/pages/SignUpPage";
+import DashboardPage from "./features/pages/DashboardPage";
 
 
 function App() {
-  return (<MainLayout>
-    <SignUpPage />
-    <Toaster position="top-center" />
-  </MainLayout>)
+  return (
+    <MainLayout>
+      <DashboardPage />
+      <Toaster position="top-center" />
+    </MainLayout>
+  )
 }
 
 export default App

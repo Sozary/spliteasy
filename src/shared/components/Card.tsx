@@ -1,5 +1,5 @@
 type CardProps = {
-    variant?: 'stats' | 'user' | 'transaction';
+    variant?: 'stats' | 'user' | 'transaction' | 'expense';
     icon?: React.ReactNode;
     actionIcon?: React.ReactNode;
     onActionIconClick?: () => void;
@@ -14,7 +14,7 @@ const TransactionCard = ({ title, description, value }: CardProps) => {
                 <p className="text-xl text-[#111827] font-medium">{title}</p>
                 <h3 className="font-medium text-gray-500">{description}</h3>
             </div>
-            <span>{value}</span>
+            <span className="text-[#111827] font-medium">{value}</span>
         </div>
     )
 }
@@ -37,12 +37,27 @@ const UserCard = ({ title, actionIcon, onActionIconClick, icon }: CardProps) => 
         </div>
     )
 }
+const ExpenseCard = ({ title, value, icon, description }: CardProps) => {
+    return (
+        <div className="flex items-center justify-between">
+            <div className="flex items-center gap-2">
+                {icon && <div className="w-10 h-10 rounded-full bg-gray-100 flex items-center justify-center">{icon}</div>}
+                <div className="flex flex-col">
+                    <p className="text-[#111827] font-medium">{title}</p>
+                    <h3 className=" text-gray-500">{description}</h3>
+                </div>
+            </div>
+            <span className="text-[#111827] font-medium">{value}</span>
+        </div>
+    )
+}
 const Card = ({ variant = 'stats', icon, title, description, value, actionIcon, onActionIconClick }: CardProps) => {
     return (
         <div className={`bg-white rounded-lg p-4 shadow-sm flex flex-col gap-2`}>
             {variant === 'transaction' && <TransactionCard title={title} description={description} value={value} />}
             {variant === 'stats' && <StatsCard title={title} description={description} value={value} />}
             {variant === 'user' && <UserCard title={title} actionIcon={actionIcon} onActionIconClick={onActionIconClick} icon={icon} />}
+            {variant === 'expense' && <ExpenseCard title={title} value={value} icon={icon} description={description} />}
         </div>
     )
 }

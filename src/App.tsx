@@ -1,11 +1,11 @@
 import { MainLayout } from "./features/layouts/MainLayout"
 import { Toaster } from 'react-hot-toast';
-import CreateGroupPage from "./features/pages/CreateGroupPage";
+import GroupPage from "./features/pages/GroupPage";
 
 function App() {
   return (
     <MainLayout>
-      <CreateGroupPage />
+      <GroupPage />
       <Toaster position="top-center" />
     </MainLayout>
   )

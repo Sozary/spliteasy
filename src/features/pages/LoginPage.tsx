@@ -1,6 +1,6 @@
+import User from "../../shared/assets/User";
 import Button from "../../shared/components/Button";
 import Input from "../../shared/components/Input";
-import User from "../auth/assets/User";
 import Password from "../auth/assets/Password";
 import LoginMessage from "../auth/components/LoginMessage";
 import LoginSignUpMessage from "../auth/components/LoginSignUpMessage";

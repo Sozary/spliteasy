@@ -1,7 +1,7 @@
+import User from "../../shared/assets/User";
 import Button from "../../shared/components/Button";
 import Input from "../../shared/components/Input";
 import Password from "../auth/assets/Password";
-import User from "../auth/assets/user";
 import SignUpSignUpMessage from "../auth/components/SignUpSignUpMessage";
 import { AuthenticationLayout } from "../layouts/AuthenticationLayout";
 

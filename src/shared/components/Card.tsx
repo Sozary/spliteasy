@@ -1,5 +1,5 @@
 type CardProps = {
-    variant?: 'stats' | 'user' | 'transaction' | 'expense';
+    variant?: 'stats' | 'user' | 'transaction' | 'expense' | 'userOwe';
     icon?: React.ReactNode;
     actionIcon?: React.ReactNode;
     onActionIconClick?: () => void;
@@ -37,6 +37,20 @@ const UserCard = ({ title, actionIcon, onActionIconClick, icon }: CardProps) => 
         </div>
     )
 }
+const UserOweCard = ({ title, actionIcon, onActionIconClick, icon, description }: CardProps) => {
+    return (
+        <div className="flex items-center justify-between">
+            <div className="flex items-center gap-2">
+                {icon && <div className="w-10 h-10 rounded-full bg-gray-100 flex items-center justify-center">{icon}</div>}
+                <div className="flex flex-col">
+                    {title && <h3 className="font-medium text-[#111827]">{title}</h3>}
+                    {description && <h3 className="font-medium text-gray-500">{description}</h3>}
+                </div>
+            </div>
+            {actionIcon && <button onClick={onActionIconClick}>{actionIcon}</button>}
+        </div>
+    )
+}
 const ExpenseCard = ({ title, value, icon, description }: CardProps) => {
     return (
         <div className="flex items-center justify-between">
@@ -53,10 +67,11 @@ const ExpenseCard = ({ title, value, icon, description }: CardProps) => {
 }
 const Card = ({ variant = 'stats', icon, title, description, value, actionIcon, onActionIconClick }: CardProps) => {
     return (
-        <div className={`bg-white rounded-lg p-4 shadow-sm flex flex-col gap-2`}>
+        <div className={`rounded-lg p-4 shadow-sm flex flex-col gap-2 ${variant === 'userOwe' ? 'bg-[#f3f4f6]' : 'bg-white'}`}>
             {variant === 'transaction' && <TransactionCard title={title} description={description} value={value} />}
             {variant === 'stats' && <StatsCard title={title} description={description} value={value} />}
             {variant === 'user' && <UserCard title={title} actionIcon={actionIcon} onActionIconClick={onActionIconClick} icon={icon} />}
+            {variant === 'userOwe' && <UserOweCard title={title} actionIcon={actionIcon} onActionIconClick={onActionIconClick} icon={icon} description={description} />}
             {variant === 'expense' && <ExpenseCard title={title} value={value} icon={icon} description={description} />}
         </div>
     )

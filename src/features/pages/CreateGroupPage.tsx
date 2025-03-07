@@ -7,7 +7,7 @@ import Times from "../layouts/assets/Times";
 
 const CreateGroupPage = () => {
     return (
-        <ButtonViewLayout title="Create New Group" actionButtonLabel="Create Group" discardable onDiscard={() => { }}>
+        <ButtonViewLayout gap title="Create New Group" actionButtonLabel="Create Group" discardable onDiscard={() => { }}>
             <Input placeholder="Enter group name" name="groupName" label="Group Name" onChange={() => { }} />
             <Input placeholder="Search by name" name="addMembers" label="Add Members" onChange={() => { }} logo={<Search size={20} color="#4B5563" />} />
             <span className="font-medium text-[#4B5563]">Selected Members (3)</span>

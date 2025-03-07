@@ -13,6 +13,7 @@ interface ButtonViewLayoutProps {
     onActionButtonClick?: () => void;
     fullWidth?: boolean;
     backButton?: boolean;
+    gap?: boolean;
 }
 
 interface TopBarProps {
@@ -42,11 +43,11 @@ const BottomBar = ({ actionButtonLabel, onActionButtonClick }: BottomBarProps) =
         <Button className="w-full" onClick={onActionButtonClick}>{actionButtonLabel}</Button>
     </div>
 }
-export const ButtonViewLayout = ({ children, title, discardable, onDiscard, actionButtonLabel, onActionButtonClick, backButton, fullWidth }: ButtonViewLayoutProps) => {
+export const ButtonViewLayout = ({ children, title, discardable, onDiscard, actionButtonLabel, onActionButtonClick, backButton, fullWidth, gap }: ButtonViewLayoutProps) => {
     return (
         <div className="flex flex-col h-screen">
             <TopBar title={title} discardable={discardable} onDiscard={onDiscard} backButton={backButton} />
-            <div className={`flex-grow max-h-[calc(100vh-142px)] overflow-y-auto gap-5 flex flex-col ${fullWidth ? 'p-0' : 'p-5'}`}>
+            <div className={`flex-grow max-h-[calc(100vh-142px)] overflow-y-auto flex flex-col ${gap ? 'gap-5' : ''} ${fullWidth ? 'p-0' : 'p-5'}`}>
                 {children}
             </div>
             <BottomBar actionButtonLabel={actionButtonLabel} onActionButtonClick={onActionButtonClick} />

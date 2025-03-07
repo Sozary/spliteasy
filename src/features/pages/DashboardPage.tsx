@@ -1,5 +1,6 @@
 import Card from "../../shared/components/Card";
 import { GlobalViewLayout } from "../layouts/GlobalViewLayout"
+
 const DashboardPage = () => {
     return (
         <GlobalViewLayout>

@@ -10,6 +10,20 @@ interface ApiError {
 export class ErrorHandler {
 	static handle(error: unknown) {
 		if (error instanceof AxiosError) {
+			if (!error.response) {
+				if (
+					error.code === "ERR_NETWORK" ||
+					error.code === "ERR_CONNECTION_REFUSED"
+				) {
+					toast.error(
+						"Unable to connect to server. Please check your connection."
+					);
+					return;
+				}
+				toast.error(error.message || "An unexpected error occurred");
+				return;
+			}
+
 			const data = error.response?.data as ApiError;
 
 			switch (error.response?.status) {

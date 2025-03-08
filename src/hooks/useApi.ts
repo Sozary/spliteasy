@@ -3,9 +3,9 @@ import { useMemo } from "react";
 import { AuthApi, Configuration } from "../api";
 
 export const useApi = () => {
-	const config = useMemo(() => {
+	return useMemo(() => {
 		const token = localStorage.getItem("token");
-		return new Configuration({
+		const config = new Configuration({
 			basePath: import.meta.env.VITE_API_URL,
 			baseOptions: {
 				headers: {
@@ -13,12 +13,9 @@ export const useApi = () => {
 				},
 			},
 		});
-	}, []);
 
-	return useMemo(
-		() => ({
+		return {
 			auth: new AuthApi(config),
-		}),
-		[config]
-	);
+		};
+	}, []);
 };

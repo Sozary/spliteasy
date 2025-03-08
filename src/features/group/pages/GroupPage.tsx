@@ -1,8 +1,8 @@
-import { ButtonViewLayout } from "../../shared/layouts/ButtonViewLayout"
-import User from "../../shared/assets/User";
-import Card from "../../shared/components/Card";
-import Money from "../../shared/assets/Money";
-import { Button } from "../../shared/components/Button";
+import Money from "@/shared/assets/Money";
+import User from "@/shared/assets/User";
+import { Button } from "@/shared/components/Button";
+import Card from "@/shared/components/Card";
+import { ButtonViewLayout } from "@/shared/layouts/ButtonViewLayout";
 
 const GroupPage = () => {
     return (

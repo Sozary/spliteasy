@@ -1,13 +1,13 @@
 import { RouteObject } from "react-router-dom";
-import CreateExpensePage from "../../features/pages/CreateExpensePage";
-import CreateGroupPage from "../../features/pages/CreateGroupPage";
-import DashboardPage from "../../features/pages/DashboardPage";
-import GroupBalancePage from "../../features/pages/GroupBalancePage";
-import GroupPage from "../../features/pages/GroupPage";
-import GroupsPage from "../../features/pages/GroupsPage";
-import LoginPage from "../../features/pages/LoginPage";
-import SignUpPage from "../../features/pages/SignUpPage";
+import CreateExpensePage from "../../features/expense/pages/CreateExpensePage";
 import { ProtectedRoute } from "./ProtectedRoute";
+import LoginPage from "@/features/auth/pages/LoginPage";
+import SignUpPage from "@/features/auth/pages/SignUpPage";
+import DashboardPage from "@/features/dashboard/pages/DashboardPage";
+import CreateGroupPage from "@/features/group/pages/CreateGroupPage";
+import GroupBalancePage from "@/features/group/pages/GroupBalancePage";
+import GroupPage from "@/features/group/pages/GroupPage";
+import GroupsPage from "@/features/group/pages/GroupsPage";
 
 export const routes: RouteObject[] = [
     {

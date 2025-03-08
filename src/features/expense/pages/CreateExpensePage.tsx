@@ -1,11 +1,11 @@
-import { ButtonViewLayout } from "../../shared/layouts/ButtonViewLayout"
-import Input from "../../shared/components/Input"
-import Accordion from "../../shared/components/Accordion"
-import Equal from "../../shared/assets/Equal"
-import Percent from "../../shared/assets/Percent"
-import Settings from "../../shared/assets/Settings"
-import User from "../../shared/assets/User"
-import Adjustment from "../../shared/assets/Adjustment"
+import { ButtonViewLayout } from "@/shared/layouts/ButtonViewLayout"
+import Input from "@/shared/components/Input"
+import Accordion from "@/shared/components/Accordion"
+import Equal from "@/shared/assets/Equal"
+import Percent from "@/shared/assets/Percent"
+import Settings from "@/shared/assets/Settings"
+import User from "@/shared/assets/User"
+import Adjustment from "@/shared/assets/Adjustment"
 
 const EquallySplitMethod = ({ totalAmount }: { totalAmount: number }) => {
     return (

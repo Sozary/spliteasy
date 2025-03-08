@@ -1,6 +1,6 @@
-import { Button } from "../../shared/components/Button";
-import Card from "../../shared/components/Card";
-import { GlobalViewLayout } from "../../shared/layouts/GlobalViewLayout"
+import { Button } from "@/shared/components/Button";
+import Card from "@/shared/components/Card";
+import { GlobalViewLayout } from "@/shared/layouts/GlobalViewLayout";
 
 const GroupsPage = () => {
     return (

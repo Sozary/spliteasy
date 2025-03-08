@@ -1,13 +1,14 @@
+import User from "@/shared/assets/User";
+import { Button } from "@/shared/components/Button";
+import Input from "@/shared/components/Input";
+import { AuthenticationLayout } from "@/shared/layouts/AuthenticationLayout";
+import { ErrorHandler } from "@/shared/utils/errorHandler";
 import { useState } from "react";
 import { useNavigate, useLocation } from "react-router-dom";
-import User from "../../shared/assets/User";
-import { Button } from "../../shared/components/Button";
-import Input from "../../shared/components/Input";
-import { AuthenticationLayout } from "../../shared/layouts/AuthenticationLayout";
-import { ErrorHandler } from "../../shared/utils/errorHandler";
-import Password from "../auth/assets/Password";
-import SignUpSignUpMessage from "../auth/components/SignUpSignUpMessage";
-import { useAuth } from "../auth/hooks/useAuth";
+import Password from "../assets/Password";
+import SignUpSignUpMessage from "../components/SignUpSignUpMessage";
+import { useAuth } from "../hooks/useAuth";
+
 
 export default function SignUpPage() {
     const [username, setUsername] = useState('');

@@ -1,5 +1,5 @@
-import Card from "../../shared/components/Card";
-import { GlobalViewLayout } from "../../shared/layouts/GlobalViewLayout"
+import Card from "@/shared/components/Card";
+import { GlobalViewLayout } from "@/shared/layouts/GlobalViewLayout";
 
 const DashboardPage = () => {
     return (

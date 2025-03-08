@@ -159,6 +159,25 @@ export interface ExpenseSplitDetail {
 /**
  * 
  * @export
+ * @interface MeResponse
+ */
+export interface MeResponse {
+    /**
+     * 
+     * @type {string}
+     * @memberof MeResponse
+     */
+    'username': string | null;
+    /**
+     * 
+     * @type {string}
+     * @memberof MeResponse
+     */
+    'userId'?: string;
+}
+/**
+ * 
+ * @export
  * @interface SettleRequest
  */
 export interface SettleRequest {
@@ -298,6 +317,35 @@ export const AuthApiAxiosParamCreator = function (configuration?: Configuration)
     return {
         /**
          * 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        authMeGet: async (options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+            const localVarPath = `/auth/me`;
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * 
          * @param {SignInRequest} [signInRequest] 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -374,6 +422,17 @@ export const AuthApiFp = function(configuration?: Configuration) {
     return {
         /**
          * 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async authMeGet(options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<MeResponse>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.authMeGet(options);
+            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
+            const localVarOperationServerBasePath = operationServerMap['AuthApi.authMeGet']?.[localVarOperationServerIndex]?.url;
+            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
+        },
+        /**
+         * 
          * @param {SignInRequest} [signInRequest] 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -408,6 +467,14 @@ export const AuthApiFactory = function (configuration?: Configuration, basePath?
     return {
         /**
          * 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        authMeGet(options?: RawAxiosRequestConfig): AxiosPromise<MeResponse> {
+            return localVarFp.authMeGet(options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
          * @param {SignInRequest} [signInRequest] 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -434,6 +501,16 @@ export const AuthApiFactory = function (configuration?: Configuration, basePath?
  * @extends {BaseAPI}
  */
 export class AuthApi extends BaseAPI {
+    /**
+     * 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof AuthApi
+     */
+    public authMeGet(options?: RawAxiosRequestConfig) {
+        return AuthApiFp(this.configuration).authMeGet(options).then((request) => request(this.axios, this.basePath));
+    }
+
     /**
      * 
      * @param {SignInRequest} [signInRequest] 

@@ -14,6 +14,7 @@ interface InputProps {
     variant?: 'input' | 'select';
     options?: Option[];
     className?: string;
+    required?: boolean;
 }
 
 const Input = ({
@@ -27,6 +28,7 @@ const Input = ({
     variant = 'input',
     options = [],
     className = '',
+    required = false,
 }: InputProps) => {
     return <div className="flex gap-2 flex-col">
         {label && <label htmlFor={name}>{label}</label>}
@@ -38,6 +40,7 @@ const Input = ({
             )}
             {variant === 'input' ? (
                 <input
+                    required={required}
                     type={type}
                     placeholder={placeholder}
                     value={value}
@@ -47,6 +50,7 @@ const Input = ({
                 />
             ) : (
                 <select
+                    required={required}
                     value={value}
                     onChange={onChange}
                     className={`border border-gray-300 rounded-md p-2 w-full bg-white appearance-none ${logo ? "pl-10" : ""

@@ -1,56 +1,81 @@
-import { MainLayout } from "./features/layouts/MainLayout"
-import { Toaster } from 'react-hot-toast';
-import GroupBalancePage from "./features/pages/GroupBalancePage";
-import LoginPage from "./features/pages/LoginPage";
-import SignUpPage from "./features/pages/SignUpPage";
-import DashboardPage from "./features/pages/DashboardPage";
+import { BrowserRouter as Router, Routes, Route, Navigate } from "react-router-dom";
+import { MainLayout } from "./features/layouts/MainLayout";
+import { Toaster } from "react-hot-toast";
+import CreateExpensePage from "./features/pages/CreateExpensePage";
+import { ProtectedRoute } from "./components/ProtectedRoute";
 import CreateGroupPage from "./features/pages/CreateGroupPage";
+import DashboardPage from "./features/pages/DashboardPage";
+import GroupBalancePage from "./features/pages/GroupBalancePage";
 import GroupPage from "./features/pages/GroupPage";
 import GroupsPage from "./features/pages/GroupsPage";
-import { useEffect, useState } from "react";
-import CreateExpensePage from "./features/pages/CreateExpensePage";
+import LoginPage from "./features/pages/LoginPage";
+import SignUpPage from "./features/pages/SignUpPage";
+import { AuthProvider } from "./contexts/AuthProvider";
+
 function App() {
-  const pages = [
-    { name: "Login", component: <LoginPage /> },
-    { name: "SignUp", component: <SignUpPage /> },
-    { name: "Dashboard", component: <DashboardPage /> },
-    { name: "Create Group", component: <CreateGroupPage /> },
-    { name: "Group Details", component: <GroupPage /> },
-    { name: "Groups", component: <GroupsPage /> },
-    { name: "Balance Settlement", component: <GroupBalancePage /> },
-    { name: "Create Expense", component: <CreateExpensePage /> },
-  ];
-  const [currentPageIndex, setCurrentPageIndex] = useState(0);
-
-  useEffect(() => {
-    const handleKeyPress = (event: KeyboardEvent) => {
-      if (event.key === "ArrowLeft") {
-        // Go to previous page
-        setCurrentPageIndex((prev) =>
-          prev === 0 ? pages.length - 1 : prev - 1
-        );
-      } else if (event.key === "ArrowRight") {
-        // Go to next page
-        setCurrentPageIndex((prev) =>
-          prev === pages.length - 1 ? 0 : prev + 1
-        );
-      }
-    };
-
-    // Add event listener
-    window.addEventListener("keydown", handleKeyPress);
-
-    // Cleanup
-    return () => {
-      window.removeEventListener("keydown", handleKeyPress);
-    };
-  }, []);
   return (
-    <MainLayout>
-      <CreateExpensePage />
-      {/* {pages[currentPageIndex].component} */}
-      <Toaster position="top-center" />
-    </MainLayout>
-  )
+    <AuthProvider>
+      <Router>
+        <MainLayout>
+          <Routes>
+            <Route path="/login" element={<LoginPage />} />
+            <Route path="/signup" element={<SignUpPage />} />
+            <Route path="/" element={<Navigate to="/dashboard" replace />} />
+
+            <Route
+              path="/dashboard"
+              element={
+                <ProtectedRoute>
+                  <DashboardPage />
+                </ProtectedRoute>
+              }
+            />
+            <Route
+              path="/groups"
+              element={
+                <ProtectedRoute>
+                  <GroupsPage />
+                </ProtectedRoute>
+              }
+            />
+            <Route
+              path="/groups/create"
+              element={
+                <ProtectedRoute>
+                  <CreateGroupPage />
+                </ProtectedRoute>
+              }
+            />
+            <Route
+              path="/groups/:id"
+              element={
+                <ProtectedRoute>
+                  <GroupPage />
+                </ProtectedRoute>
+              }
+            />
+            <Route
+              path="/groups/:id/balance"
+              element={
+                <ProtectedRoute>
+                  <GroupBalancePage />
+                </ProtectedRoute>
+              }
+            />
+            <Route
+              path="/groups/:id/expenses/create"
+              element={
+                <ProtectedRoute>
+                  <CreateExpensePage />
+                </ProtectedRoute>
+              }
+            />
+          </Routes>
+          <Toaster position="top-center" />
+        </MainLayout>
+      </Router>
+    </AuthProvider>
+  );
 }
+
 export default App;

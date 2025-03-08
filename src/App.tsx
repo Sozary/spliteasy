@@ -8,7 +8,7 @@ import CreateGroupPage from "./features/pages/CreateGroupPage";
 import GroupPage from "./features/pages/GroupPage";
 import GroupsPage from "./features/pages/GroupsPage";
 import { useEffect, useState } from "react";
-
+import CreateExpensePage from "./features/pages/CreateExpensePage";
 function App() {
   const pages = [
     { name: "Login", component: <LoginPage /> },
@@ -18,6 +18,7 @@ function App() {
     { name: "Group Details", component: <GroupPage /> },
     { name: "Groups", component: <GroupsPage /> },
     { name: "Balance Settlement", component: <GroupBalancePage /> },
+    { name: "Create Expense", component: <CreateExpensePage /> },
   ];
   const [currentPageIndex, setCurrentPageIndex] = useState(0);
 
@@ -46,7 +47,8 @@ function App() {
   }, []);
   return (
     <MainLayout>
-      {pages[currentPageIndex].component}
+      <CreateExpensePage />
+      {/* {pages[currentPageIndex].component} */}
       <Toaster position="top-center" />
     </MainLayout>
   )

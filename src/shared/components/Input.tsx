@@ -13,6 +13,7 @@ interface InputProps {
     logo?: React.ReactNode;
     variant?: 'input' | 'select';
     options?: Option[];
+    className?: string;
 }
 
 const Input = ({
@@ -24,7 +25,8 @@ const Input = ({
     onChange = () => { },
     logo,
     variant = 'input',
-    options = []
+    options = [],
+    className = '',
 }: InputProps) => {
     return <div className="flex gap-2 flex-col">
         {label && <label htmlFor={name}>{label}</label>}
@@ -41,14 +43,14 @@ const Input = ({
                     value={value}
                     onChange={onChange}
                     className={`border border-gray-300 rounded-md p-2 w-full bg-white ${logo ? "pl-10" : ""
-                        }`}
+                        } ${className}`}
                 />
             ) : (
                 <select
                     value={value}
                     onChange={onChange}
                     className={`border border-gray-300 rounded-md p-2 w-full bg-white appearance-none ${logo ? "pl-10" : ""
-                        }`}
+                        } ${className}`}
                 >
                     {placeholder && (
                         <option value="" disabled>

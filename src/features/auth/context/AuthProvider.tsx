@@ -1,18 +1,17 @@
-import { ReactNode, useState, useMemo, useEffect } from "react";
-import { AuthApi, Configuration } from "../api";
-import { API_URL } from "../utils/config";
-import { ErrorHandler } from "../utils/errorHandler";
-import { AuthContext, User } from "./AuthContext";
+import { ReactNode, useState, useEffect } from "react";
+import { useApi } from "../../../hooks/useApi";
+import { ErrorHandler } from "../../../shared/utils/errorHandler";
+import { User, AuthContext } from "./AuthContext";
 
 export const AuthProvider = ({ children }: { children: ReactNode }) => {
     const [isAuthenticated, setIsAuthenticated] = useState<boolean>(false);
     const [user, setUser] = useState<User | null>(null);
-    const authApi = useMemo(() => new AuthApi(new Configuration({ basePath: API_URL })), []);
+    const { auth } = useApi();
 
     useEffect(() => {
         const token = localStorage.getItem("token");
         if (token) {
-            authApi.authMeGet()
+            auth.authMeGet()
                 .then((response) => {
                     setUser({ username: response.data.username!, id: response.data.userId! });
                     setIsAuthenticated(true);
@@ -23,29 +22,29 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
                     setUser(null);
                 });
         }
-    }, [authApi]);
+    }, [auth]);
 
     const login = async (username: string, password: string) => {
-        const response = await authApi.authSignInPost({ username, password });
+        const response = await auth.authSignInPost({ username, password });
         const { token, userId } = response.data;
 
         if (token) {
             localStorage.setItem("token", token);
             setIsAuthenticated(true);
             setUser({ username, id: userId || "" });
-            ErrorHandler.success("Successfully logged in!");
+            ErrorHandler.handle("Successfully logged in!");
         }
     };
 
     const signup = async (username: string, password: string) => {
-        const response = await authApi.authSignUpPost({ username, password });
+        const response = await auth.authSignUpPost({ username, password });
         const { token } = response.data;
 
         if (token) {
             localStorage.setItem("token", token);
             setIsAuthenticated(true);
             setUser({ username, id: '' });
-            ErrorHandler.success("Account created successfully!");
+            ErrorHandler.handle("Account created successfully!");
         }
     };
 

@@ -1,14 +1,15 @@
 import { useState } from 'react';
 import { useNavigate, useLocation } from 'react-router-dom';
 import User from "../../shared/assets/User";
-import Button from "../../shared/components/Button";
 import Input from "../../shared/components/Input";
 import Password from "../auth/assets/Password";
 import LoginMessage from "../auth/components/LoginMessage";
 import LoginSignUpMessage from "../auth/components/LoginSignUpMessage";
-import { AuthenticationLayout } from "../layouts/AuthenticationLayout";
-import { ErrorHandler } from '../../utils/errorHandler';
-import { useAuth } from '../../hooks/useAuth';
+import { ErrorHandler } from '../../shared/utils/errorHandler';
+import { useAuth } from '../auth/hooks/useAuth';
+import { Button } from '../../shared/components/Button';
+import { AuthenticationLayout } from '../../shared/layouts/AuthenticationLayout';
+
 export default function LoginPage() {
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');

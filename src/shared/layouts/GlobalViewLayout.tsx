@@ -1,9 +1,9 @@
 // GlobalViewLayout is a layout that is used to display the on the dashboard / group list page / user page
 import { ReactNode, useState } from "react";
-import User from "../../shared/assets/User";
-import Home from "./assets/Home";
-import Group from "./assets/Group";
-import Profile from "./assets/Profile";
+import User from "../assets/User";
+import Home from "../assets/Home";
+import Group from "../assets/Group";
+import Profile from "../assets/Profile";
 
 interface GlobalViewLayoutProps {
     children: ReactNode;

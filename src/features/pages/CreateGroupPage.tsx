@@ -1,9 +1,9 @@
-import { ButtonViewLayout } from "../layouts/ButtonViewLayout"
+import { ButtonViewLayout } from "../../shared/layouts/ButtonViewLayout"
 import Input from "../../shared/components/Input"
 import Search from "../../shared/assets/Search";
 import Card from "../../shared/components/Card";
 import User from "../../shared/assets/User";
-import Times from "../layouts/assets/Times";
+import Times from "../../shared/assets/Times";
 
 const CreateGroupPage = () => {
     return (

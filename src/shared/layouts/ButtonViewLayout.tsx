@@ -1,8 +1,7 @@
-// GroupViewLayout is a layout that is used to display a group or add a new group/expense, with a button at the bottom
 import { ReactNode } from "react";
-import Button from "../../shared/components/Button";
-import Times from "./assets/Times";
-import Chevron from "../../shared/assets/Chevron";
+import Times from "../assets/Times";
+import Chevron from "../assets/Chevron";
+import { Button } from "../components/Button";
 
 interface ButtonViewLayoutProps {
     children: ReactNode;

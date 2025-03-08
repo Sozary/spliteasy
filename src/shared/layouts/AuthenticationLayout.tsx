@@ -1,5 +1,5 @@
 import { ReactNode } from 'react';
-import Navbar from '../auth/components/Navbar';
+import Navbar from '../../features/auth/components/Navbar';
 
 interface AuthenticationLayoutProps {
     children: ReactNode;

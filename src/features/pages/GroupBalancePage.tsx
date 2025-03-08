@@ -1,7 +1,7 @@
 import User from "../../shared/assets/User";
 import Card from "../../shared/components/Card";
 import Input from "../../shared/components/Input";
-import { ButtonViewLayout } from "../layouts/ButtonViewLayout"
+import { ButtonViewLayout } from "../../shared/layouts/ButtonViewLayout"
 
 
 const GroupBalancePage = () => {

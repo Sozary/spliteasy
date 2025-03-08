@@ -1,4 +1,4 @@
-import { ButtonViewLayout } from "../layouts/ButtonViewLayout"
+import { ButtonViewLayout } from "../../shared/layouts/ButtonViewLayout"
 import Input from "../../shared/components/Input"
 import Accordion from "../../shared/components/Accordion"
 import Equal from "../../shared/assets/Equal"

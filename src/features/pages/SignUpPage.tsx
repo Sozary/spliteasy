@@ -1,9 +1,9 @@
 import User from "../../shared/assets/User";
-import Button from "../../shared/components/Button";
+import { Button } from "../../shared/components/Button";
 import Input from "../../shared/components/Input";
+import { AuthenticationLayout } from "../../shared/layouts/AuthenticationLayout";
 import Password from "../auth/assets/Password";
 import SignUpSignUpMessage from "../auth/components/SignUpSignUpMessage";
-import { AuthenticationLayout } from "../layouts/AuthenticationLayout";
 
 export default function SignUpPage() {
     return (

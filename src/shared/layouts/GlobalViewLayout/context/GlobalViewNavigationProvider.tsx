@@ -12,6 +12,9 @@ export const GlobalViewNavigationProvider = ({ children }: GlobalViewNavigationP
     const navigate = useNavigate();
 
     const getCurrentRoute = useCallback((path: string): GlobalViewNavigationRoute => {
+        if (path.startsWith('/groups/')) {
+            return 'groups';
+        }
         const pathToRoute: Record<string, GlobalViewNavigationRoute> = {
             '/dashboard': 'dashboard',
             '/groups': 'groups',

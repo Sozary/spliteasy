@@ -26,7 +26,10 @@ const GroupsPage = () => {
 
     const closeCreateGroupModal = useCallback((event?: BeforeUnloadEvent) => {
         if (!isCreateGroupModalOpen) return;
-        if (!isDirty) return;
+        if (!isDirty) {
+            setIsCreateGroupModalOpen(false);
+            return;
+        }
 
         event?.preventDefault();
         if (confirm("Are you sure you want to discard the changes?")) {

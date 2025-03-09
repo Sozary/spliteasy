@@ -1,28 +1,9 @@
-import { ReactNode } from "react";
-import User from "../assets/User";
-import Home from "../assets/Home";
-import Group from "../assets/Group";
-import Profile from "../assets/Profile";
-import { useGlobalViewNavigation } from "@/features/navigation/hooks/useGlobalViewNavigation";
-import { GlobalViewNavigationProvider } from "@/features/navigation/context/GlobalViewNavigationProvider";
+import Group from "@/shared/assets/Group";
+import Home from "@/shared/assets/Home";
+import Profile from "@/shared/assets/Profile";
+import { useGlobalViewNavigation } from "../hooks/useGlobalViewNavigation";
 
-interface GlobalViewLayoutProps {
-    children: ReactNode;
-}
-
-const TopBar = () => {
-    return (
-        <div className="flex justify-between items-center p-4 bg-white border-b border-gray-200">
-            <span className="text-xl">SplitEasy</span>
-            <div className="flex items-center gap-2">
-                <span>John Doe</span>
-                <User />
-            </div>
-        </div>
-    )
-}
-
-const BottomBar = () => {
+export const BottomBar = () => {
     const { currentRoute, navigate } = useGlobalViewNavigation();
 
     const bottomBarItems = [
@@ -70,16 +51,3 @@ const BottomBar = () => {
         </div>
     )
 }
-export const GlobalViewLayout = ({ children }: GlobalViewLayoutProps) => {
-    return (
-        <GlobalViewNavigationProvider>
-            <div className="flex flex-col h-screen">
-                <TopBar />
-                <div className="flex-grow max-h-[calc(100vh-142px)] overflow-y-auto p-5 gap-5 flex flex-col">
-                    {children}
-                </div>
-                <BottomBar />
-            </div>
-        </GlobalViewNavigationProvider>
-    );
-}; 

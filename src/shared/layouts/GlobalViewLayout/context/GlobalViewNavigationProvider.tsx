@@ -2,7 +2,6 @@ import { ReactNode, useCallback, useEffect, useState } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { GlobalViewNavigationContext, GlobalViewNavigationRoute } from './GlobalViewNavigationContext';
 
-
 interface GlobalViewNavigationProviderProps {
     children: ReactNode;
 }

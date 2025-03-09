@@ -5,9 +5,13 @@ import Card from "@/shared/components/Card";
 import User from "@/shared/assets/User";
 import Times from "@/shared/assets/Times";
 
-const CreateGroupPage = () => {
+interface CreateGroupPageProps {
+    onClose: () => void;
+    className?: string;
+}
+const CreateGroupPage = ({ onClose, className }: CreateGroupPageProps) => {
     return (
-        <ButtonViewLayout gap title="Create New Group" actionButtonLabel="Create Group" discardable onDiscard={() => { }}>
+        <ButtonViewLayout gap title="Create New Group" actionButtonLabel="Create Group" discardable onDiscard={onClose} className={className}>
             <Input placeholder="Enter group name" name="groupName" label="Group Name" onChange={() => { }} />
             <Input placeholder="Search by name" name="addMembers" label="Add Members" onChange={() => { }} logo={<Search size={20} color="#4B5563" />} />
             <span className="font-medium text-[#4B5563]">Selected Members (3)</span>

@@ -13,7 +13,7 @@ interface ButtonProps
     VariantProps<typeof buttonVariants> { }
 
 const buttonVariants = cva(
-    'rounded-md font-medium transition-colors focus:outline-none focus:ring-2',
+    'rounded-md font-medium transition-colors focus:outline-none focus:ring-2 cursor-pointer',
     {
         variants: {
             variant: {

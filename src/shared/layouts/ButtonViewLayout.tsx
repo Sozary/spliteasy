@@ -13,6 +13,7 @@ interface ButtonViewLayoutProps {
     fullWidth?: boolean;
     backButton?: boolean;
     gap?: boolean;
+    className?: string;
 }
 
 interface TopBarProps {
@@ -32,7 +33,7 @@ const TopBar = ({ title, discardable, onDiscard, backButton }: TopBarProps) => {
         <div className="flex justify-between items-center p-4 bg-white border-b border-gray-200">
             <Chevron size={backButton ? 24 : 0} color="#111827" />
             <span className="text-xl font-medium text-[#111827] flex-grow text-center">{title}</span>
-            <Times size={discardable ? 24 : 0} onClick={onDiscard} />
+            <Times size={discardable ? 24 : 0} onClick={onDiscard} className="cursor-pointer" />
         </div>
     )
 }
@@ -42,9 +43,9 @@ const BottomBar = ({ actionButtonLabel, onActionButtonClick }: BottomBarProps) =
         <Button className="w-full" onClick={onActionButtonClick}>{actionButtonLabel}</Button>
     </div>
 }
-export const ButtonViewLayout = ({ children, title, discardable, onDiscard, actionButtonLabel, onActionButtonClick, backButton, fullWidth, gap }: ButtonViewLayoutProps) => {
+export const ButtonViewLayout = ({ children, title, discardable, onDiscard, actionButtonLabel, onActionButtonClick, backButton, fullWidth, gap, className }: ButtonViewLayoutProps) => {
     return (
-        <div className="flex flex-col h-screen">
+        <div className={`flex flex-col h-screen ${className}`}>
             <TopBar title={title} discardable={discardable} onDiscard={onDiscard} backButton={backButton} />
             <div className={`flex-grow max-h-[calc(100vh-142px)] overflow-y-auto flex flex-col ${gap ? 'gap-5' : ''} ${fullWidth ? 'p-0' : 'p-5'}`}>
                 {children}

@@ -4,9 +4,7 @@ import { ProtectedRoute } from "./ProtectedRoute";
 import LoginPage from "@/features/auth/pages/LoginPage";
 import SignUpPage from "@/features/auth/pages/SignUpPage";
 import DashboardPage from "@/features/dashboard/pages/DashboardPage";
-import CreateGroupPage from "@/features/group/pages/CreateGroupPage";
 import GroupBalancePage from "@/features/group/pages/GroupBalancePage";
-import GroupPage from "@/features/group/pages/GroupPage";
 import GroupsPage from "@/features/group/pages/GroupsPage";
 
 export const routes: RouteObject[] = [
@@ -31,12 +29,8 @@ export const routes: RouteObject[] = [
                 element: <GroupsPage />
             },
             {
-                path: 'groups/create',
-                element: <CreateGroupPage />
-            },
-            {
-                path: 'groups/:id',
-                element: <GroupPage />
+                path: 'groups/:groupId',
+                element: <GroupsPage />
             },
             {
                 path: 'groups/:id/balance',

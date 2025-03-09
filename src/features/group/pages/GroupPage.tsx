@@ -4,9 +4,17 @@ import { Button } from "@/shared/components/Button";
 import Card from "@/shared/components/Card";
 import { ButtonViewLayout } from "@/shared/layouts/ButtonViewLayout";
 
-const GroupPage = () => {
+interface GroupPageProps {
+    className?: string;
+    groupId: string | null;
+    onBackButtonClick: () => void;
+}
+
+const GroupPage = ({ className, groupId, onBackButtonClick }: GroupPageProps) => {
+
+
     return (
-        <ButtonViewLayout gap fullWidth backButton title="Weekend Trip" actionButtonLabel="+ Add New Expense" onActionButtonClick={() => { }}>
+        <ButtonViewLayout className={className} gap fullWidth backButton title="Weekend Trip" actionButtonLabel="+ Add New Expense" onActionButtonClick={() => { }} onBackButtonClick={onBackButtonClick}>
             <div className="flex justify-between bg-white border-b border-gray-200 p-4">
                 <div className="flex gap-2 items-center">
                     <User size={45} color="#111827" />

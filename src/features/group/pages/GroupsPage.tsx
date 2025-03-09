@@ -3,6 +3,8 @@ import Card from "@/shared/components/Card";
 import { GlobalViewLayout } from "@/shared/layouts/GlobalViewLayout";
 import CreateGroupPage from "./CreateGroupPage";
 import { useEffect, useState } from "react";
+import GroupPage from "./GroupPage";
+import { ClosableLayout } from "@/shared/layouts/ClosableLayout";
 const GroupsPage = () => {
     const [isCreateGroupModalOpen, setIsCreateGroupModalOpen] = useState(false);
     const closeCreateGroupModal = (event: BeforeUnloadEvent) => {
@@ -27,10 +29,15 @@ const GroupsPage = () => {
             </div>
             <div className="flex flex-col gap-2">
                 {Array.from({ length: 10 }).map((_, index) => (
-                    <Card key={index} variant="transaction" title="Weekend Trip" description="6 members" />
+                    <Card key={index} variant="transaction" title="Weekend Trip" description="6 members" className="cursor-pointer hover:bg-gray-200 transition-all duration-300" />
                 ))}
             </div>
-            <CreateGroupPage onClose={() => setIsCreateGroupModalOpen(false)} className={`transition-all duration-300 z-10 fixed bottom-0 left-0 right-0 bg-[#F9FAFB] ${isCreateGroupModalOpen ? 'scale-100' : 'scale-0'}`} />
+            <ClosableLayout onClose={() => setIsCreateGroupModalOpen(false)} className={`transition-all duration-300 z-10 fixed bottom-0 left-0 right-0 bg-[#F9FAFB] ${isCreateGroupModalOpen ? 'scale-100' : 'scale-0'}`}>
+                <CreateGroupPage onClose={() => setIsCreateGroupModalOpen(false)} />
+            </ClosableLayout>
+            
+            <GroupPage onClose={() => setIsCreateGroupModalOpen(false)} className={`transition-all duration-300 z-10 fixed bottom-0 left-0 right-0 bg-[#F9FAFB] ${isCreateGroupModalOpen ? 'scale-100' : 'scale-0'}`} />
+
         </GlobalViewLayout>
     )
 }

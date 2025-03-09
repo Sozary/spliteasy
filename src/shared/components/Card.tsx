@@ -6,6 +6,7 @@ type CardProps = {
     title?: string;
     description?: string;
     value?: string;
+    className?: string;
 }
 const TransactionCard = ({ title, description, value }: CardProps) => {
     return (
@@ -65,9 +66,9 @@ const ExpenseCard = ({ title, value, icon, description }: CardProps) => {
         </div>
     )
 }
-const Card = ({ variant = 'stats', icon, title, description, value, actionIcon, onActionIconClick }: CardProps) => {
+const Card = ({ variant = 'stats', icon, title, description, value, actionIcon, onActionIconClick, className }: CardProps) => {
     return (
-        <div className={`rounded-lg p-4 shadow-sm flex flex-col gap-2 ${variant === 'userOwe' ? 'bg-[#f3f4f6]' : 'bg-white'}`}>
+        <div className={`rounded-lg p-4 shadow-sm flex flex-col gap-2 ${variant === 'userOwe' ? 'bg-[#f3f4f6]' : 'bg-white'} ${className}`}>
             {variant === 'transaction' && <TransactionCard title={title} description={description} value={value} />}
             {variant === 'stats' && <StatsCard title={title} description={description} value={value} />}
             {variant === 'user' && <UserCard title={title} actionIcon={actionIcon} onActionIconClick={onActionIconClick} icon={icon} />}

@@ -1,4 +1,4 @@
-import { ReactNode, useState } from 'react';
+import { ReactNode, useCallback, useEffect, useState } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { GlobalViewNavigationContext, GlobalViewNavigationRoute } from './GlobalViewNavigationContext';
 
@@ -8,24 +8,35 @@ interface GlobalViewNavigationProviderProps {
 }
 
 export const GlobalViewNavigationProvider = ({ children }: GlobalViewNavigationProviderProps) => {
+    const [isLoading, setIsLoading] = useState(true);
     const location = useLocation();
-    const pathname = location.pathname.split('/')[1].charAt(0).toUpperCase() + location.pathname.split('/')[1].slice(1);
-
-    const [currentRoute, setCurrentRoute] = useState<GlobalViewNavigationRoute>(pathname as GlobalViewNavigationRoute);
     const navigate = useNavigate();
 
+    const getCurrentRoute = useCallback((path: string): GlobalViewNavigationRoute => {
+        const pathToRoute: Record<string, GlobalViewNavigationRoute> = {
+            '/dashboard': 'dashboard',
+            '/groups': 'groups',
+            '/profile': 'profile',
+        };
+        const route = pathToRoute[path] || 'dashboard';
+        return route;
+    }, []);
+
+    const [currentRoute, setCurrentRoute] = useState<GlobalViewNavigationRoute>(
+        getCurrentRoute(location.pathname)
+    );
+
+    useEffect(() => {
+        setCurrentRoute(getCurrentRoute(location.pathname));
+    }, [getCurrentRoute, location.pathname]);
+
     const handleGlobalViewNavigation = (route: GlobalViewNavigationRoute) => {
-        setCurrentRoute(route);
-        switch (route) {
-            case 'dashboard':
-                navigate('/dashboard');
-                break;
-            case 'groups':
-                navigate('/groups');
-                break;
-            case 'profile':
-                navigate('/profile');
-                break;
+        setIsLoading(true);
+        try {
+            setCurrentRoute(route);
+            navigate(`/${route}`);
+        } finally {
+            setIsLoading(false);
         }
     };
 
@@ -34,6 +45,7 @@ export const GlobalViewNavigationProvider = ({ children }: GlobalViewNavigationP
             value={{
                 currentRoute,
                 navigate: handleGlobalViewNavigation,
+                isLoading,
             }}
         >
             {children}

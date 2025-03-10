@@ -6,6 +6,7 @@ import SignUpPage from "@/features/auth/pages/SignUpPage";
 import DashboardPage from "@/features/dashboard/pages/DashboardPage";
 import GroupBalancePage from "@/features/group/pages/GroupBalancePage";
 import GroupsPage from "@/features/group/pages/GroupsPage";
+import { RedirectToDashboard } from "@/features/dashboard/components/RedirectToDashboard";
 
 export const routes: RouteObject[] = [
     {
@@ -20,6 +21,10 @@ export const routes: RouteObject[] = [
         path: '/',
         element: <ProtectedRoute />,
         children: [
+            {
+                index: true,
+                element: <RedirectToDashboard />
+            },
             {
                 path: 'dashboard',
                 element: <DashboardPage />

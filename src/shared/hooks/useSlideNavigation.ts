@@ -38,7 +38,7 @@ export const useSlideNavigation = () => {
 		[slides, popSlide]
 	);
 
-	// Find and close slide by component type
+	// Close the topmost slide
 	const closeCurrentSlide = useCallback(() => {
 		if (slides.length > 0) {
 			const topSlide = slides[slides.length - 1];

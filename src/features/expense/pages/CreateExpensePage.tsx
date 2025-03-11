@@ -7,6 +7,11 @@ import Settings from "@/shared/assets/Settings"
 import User from "@/shared/assets/User"
 import Adjustment from "@/shared/assets/Adjustment"
 
+interface CreateExpensePageProps {
+    groupId?: string;
+    onClose?: () => void;
+}
+
 const EquallySplitMethod = ({ totalAmount }: { totalAmount: number }) => {
     return (
         <div className="flex flex-col gap-2">
@@ -82,15 +87,36 @@ const AdjustmentMethod = ({ totalAmount }: { totalAmount: number }) => {
         </div>
     )
 }
-const CreateExpensePage = () => {
+const CreateExpensePage = ({ groupId, onClose }: CreateExpensePageProps) => {
     const splitMethods = [
         { label: "Split Equally", icon: <Equal size={20} color="#4B5563" />, content: <EquallySplitMethod totalAmount={100} /> },
         { label: "Split By Percentage", icon: <Percent size={20} color="#4B5563" />, content: <PercentSplitMethod totalAmount={100} /> },
         { label: "Custom Amount", icon: <Settings size={20} color="#4B5563" />, content: <CustomSplitMethod totalAmount={100} /> },
         { label: "Adjustment", icon: <Adjustment size={20} color="#4B5563" />, content: <AdjustmentMethod totalAmount={100} /> },
     ]
+
+    const handleClose = () => {
+        if (onClose) {
+            onClose();
+        }
+    };
+
+    const handleAddExpense = () => {
+        // Add expense logic here
+
+        // Close the slide when done
+        handleClose();
+    };
+
     return (
-        <ButtonViewLayout gap title="Add New Expense" actionButtonLabel="Add Expense" discardable onDiscard={() => { }}>
+        <ButtonViewLayout
+            gap
+            title="Add New Expense"
+            actionButtonLabel="Add Expense"
+            onActionButtonClick={handleAddExpense}
+            discardable
+            onDiscard={handleClose}
+        >
             <Input placeholder="Enter an expense title" name="expenseName" label="Expense Title" onChange={() => { }} />
             <Input placeholder="Enter the amount" name="amount" label="Amount" onChange={() => { }} />
             <Input placeholder="Enter the date" name="date" label="Date" type="date" onChange={() => { }} />

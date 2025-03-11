@@ -4,7 +4,7 @@ import { Button } from "@/shared/components/Button";
 import Card from "@/shared/components/Card";
 import { ButtonViewLayout } from "@/shared/layouts/ButtonViewLayout";
 import { useSlideNavigation } from "@/shared/hooks/useSlideNavigation";
-import CreateExpensePage from "@/features/expense/pages/CreateExpensePage";
+import CreateExpensePage from "../../expense/pages/CreateExpensePage";
 
 interface GroupPageProps {
     groupId: string;
@@ -16,7 +16,7 @@ const GroupPage = ({ groupId, onClose }: GroupPageProps) => {
 
     const handleAddExpense = () => {
         openSlide(
-            <CreateExpensePage />,
+            <CreateExpensePage groupId={groupId} />,
             `/groups/${groupId}/expenses/create`,
             'scale',
             {},
@@ -25,12 +25,12 @@ const GroupPage = ({ groupId, onClose }: GroupPageProps) => {
     };
 
     return (
-        <ButtonViewLayout 
-            gap 
-            fullWidth 
-            backButton 
-            title="Weekend Trip" 
-            actionButtonLabel="+ Add New Expense" 
+        <ButtonViewLayout
+            gap
+            fullWidth
+            backButton
+            title="Weekend Trip"
+            actionButtonLabel="+ Add New Expense"
             onActionButtonClick={handleAddExpense}
             onBackButtonClick={onClose}
         >

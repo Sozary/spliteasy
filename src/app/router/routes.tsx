@@ -1,12 +1,23 @@
+// src/app/router/routes.tsx
 import { RouteObject } from "react-router-dom";
-import CreateExpensePage from "../../features/expense/pages/CreateExpensePage";
-import { ProtectedRoute } from "./ProtectedRoute";
+import { StackNavigationProvider } from '@/shared/context/StackNavigationContext';
 import LoginPage from "@/features/auth/pages/LoginPage";
 import SignUpPage from "@/features/auth/pages/SignUpPage";
-import DashboardPage from "@/features/dashboard/pages/DashboardPage";
-import GroupBalancePage from "@/features/group/pages/GroupBalancePage";
-import GroupsPage from "@/features/group/pages/GroupsPage";
 import { RedirectToDashboard } from "@/features/dashboard/components/RedirectToDashboard";
+import DashboardPage from "@/features/dashboard/pages/DashboardPage";
+import GroupsPage from "@/features/group/pages/GroupsPage";
+import { GlobalViewLayout } from "@/shared/layouts/GlobalViewLayout";
+import { ProtectedRoute } from "./ProtectedRoute";
+import { Outlet } from "react-router-dom";
+
+// Wrap the provider around the routes that need stack navigation
+const StackLayout = () => {
+    return (
+        <StackNavigationProvider>
+            <Outlet />
+        </StackNavigationProvider>
+    );
+};
 
 export const routes: RouteObject[] = [
     {
@@ -22,28 +33,39 @@ export const routes: RouteObject[] = [
         element: <ProtectedRoute />,
         children: [
             {
-                index: true,
-                element: <RedirectToDashboard />
-            },
-            {
-                path: 'dashboard',
-                element: <DashboardPage />
-            },
-            {
-                path: 'groups',
-                element: <GroupsPage />
-            },
-            {
-                path: 'groups/:groupId',
-                element: <GroupsPage />
-            },
-            {
-                path: 'groups/:id/balance',
-                element: <GroupBalancePage />
-            },
-            {
-                path: 'groups/:id/expenses/create',
-                element: <CreateExpensePage />
+                element: <StackLayout />,
+                children: [
+                    {
+                        element: <GlobalViewLayout />,
+                        children: [
+                            {
+                                index: true,
+                                element: <RedirectToDashboard />
+                            },
+                            {
+                                path: 'dashboard',
+                                element: <DashboardPage />
+                            },
+                            {
+                                path: 'groups',
+                                children: [
+                                    {
+                                        index: true,
+                                        element: <GroupsPage />
+                                    },
+                                    {
+                                        path: ':groupId',
+                                        element: <GroupsPage />
+                                    },
+                                    {
+                                        path: 'create',
+                                        element: <GroupsPage />
+                                    }
+                                ]
+                            }
+                        ]
+                    }
+                ]
             }
         ]
     }

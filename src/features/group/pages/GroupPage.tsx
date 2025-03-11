@@ -2,19 +2,20 @@ import Money from "@/shared/assets/Money";
 import User from "@/shared/assets/User";
 import { Button } from "@/shared/components/Button";
 import Card from "@/shared/components/Card";
+import { useStackNavigation } from "@/shared/context/StackNavigationContext";
 import { ButtonViewLayout } from "@/shared/layouts/ButtonViewLayout";
 
 interface GroupPageProps {
     className?: string;
     groupId: string | null;
-    onBackButtonClick: () => void;
 }
 
-const GroupPage = ({ className, groupId, onBackButtonClick }: GroupPageProps) => {
+const GroupPage = ({ className, groupId }: GroupPageProps) => {
+    const { handleClose } = useStackNavigation();
 
 
     return (
-        <ButtonViewLayout className={className} gap fullWidth backButton title="Weekend Trip" actionButtonLabel="+ Add New Expense" onActionButtonClick={() => { }} onBackButtonClick={onBackButtonClick}>
+        <ButtonViewLayout className={className} gap fullWidth backButton title="Weekend Trip" actionButtonLabel="+ Add New Expense" onActionButtonClick={() => { }} onBackButtonClick={() => { handleClose(`/groups/${groupId}`) }}>
             <div className="flex justify-between bg-white border-b border-gray-200 p-4">
                 <div className="flex gap-2 items-center">
                     <User size={45} color="#111827" />

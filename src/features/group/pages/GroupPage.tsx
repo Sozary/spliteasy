@@ -3,18 +3,37 @@ import User from "@/shared/assets/User";
 import { Button } from "@/shared/components/Button";
 import Card from "@/shared/components/Card";
 import { ButtonViewLayout } from "@/shared/layouts/ButtonViewLayout";
+import { useSlideNavigation } from "@/shared/hooks/useSlideNavigation";
+import CreateExpensePage from "@/features/expense/pages/CreateExpensePage";
 
 interface GroupPageProps {
-    className?: string;
-    groupId: string | null;
-    onBackButtonClick: () => void;
+    groupId: string;
+    onClose?: () => void;
 }
 
-const GroupPage = ({ className, groupId, onBackButtonClick }: GroupPageProps) => {
+const GroupPage = ({ groupId, onClose }: GroupPageProps) => {
+    const { openSlide } = useSlideNavigation();
 
+    const handleAddExpense = () => {
+        openSlide(
+            <CreateExpensePage />,
+            `/groups/${groupId}/expenses/create`,
+            'scale',
+            {},
+            `/groups/${groupId}`
+        );
+    };
 
     return (
-        <ButtonViewLayout className={className} gap fullWidth backButton title="Weekend Trip" actionButtonLabel="+ Add New Expense" onActionButtonClick={() => { }} onBackButtonClick={onBackButtonClick}>
+        <ButtonViewLayout 
+            gap 
+            fullWidth 
+            backButton 
+            title="Weekend Trip" 
+            actionButtonLabel="+ Add New Expense" 
+            onActionButtonClick={handleAddExpense}
+            onBackButtonClick={onClose}
+        >
             <div className="flex justify-between bg-white border-b border-gray-200 p-4">
                 <div className="flex gap-2 items-center">
                     <User size={45} color="#111827" />
@@ -45,8 +64,7 @@ const GroupPage = ({ className, groupId, onBackButtonClick }: GroupPageProps) =>
                     <Card key={index} variant="expense" title="Diner at a restaurant" description="Paid by John ● Jan 14, 2025" icon={<Money size={20} color="#4B5563" />} value="$45.50" />
                 ))}
             </div>
-
-        </ButtonViewLayout >
+        </ButtonViewLayout>
     )
 }
 export default GroupPage;

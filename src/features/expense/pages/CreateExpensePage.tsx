@@ -6,6 +6,8 @@ import Percent from "@/shared/assets/Percent"
 import Settings from "@/shared/assets/Settings"
 import User from "@/shared/assets/User"
 import Adjustment from "@/shared/assets/Adjustment"
+import { useSlide } from "@/shared/context/SlideContext"
+import { useNavigate, useParams } from "react-router-dom"
 
 interface CreateExpensePageProps {
     groupId?: string;
@@ -87,7 +89,14 @@ const AdjustmentMethod = ({ totalAmount }: { totalAmount: number }) => {
         </div>
     )
 }
-const CreateExpensePage = ({ groupId, onClose }: CreateExpensePageProps) => {
+const CreateExpensePage = ({ groupId: propGroupId, onClose }: CreateExpensePageProps) => {
+    const { closeSlide } = useSlide();
+    const params = useParams<{ groupId?: string }>();
+    const navigate = useNavigate();
+
+    // Use param groupId if prop is not provided
+    const groupId = propGroupId || params.groupId;
+
     const splitMethods = [
         { label: "Split Equally", icon: <Equal size={20} color="#4B5563" />, content: <EquallySplitMethod totalAmount={100} /> },
         { label: "Split By Percentage", icon: <Percent size={20} color="#4B5563" />, content: <PercentSplitMethod totalAmount={100} /> },
@@ -98,11 +107,19 @@ const CreateExpensePage = ({ groupId, onClose }: CreateExpensePageProps) => {
     const handleClose = () => {
         if (onClose) {
             onClose();
+        } else {
+            // Direct URL load - navigate back to the group page
+            if (groupId) {
+                navigate(`/groups/${groupId}`, { replace: true });
+            } else {
+                navigate('/groups', { replace: true });
+            }
         }
     };
 
     const handleAddExpense = () => {
         // Add expense logic here
+        console.log("Adding expense for group:", groupId);
 
         // Close the slide when done
         handleClose();
@@ -125,7 +142,7 @@ const CreateExpensePage = ({ groupId, onClose }: CreateExpensePageProps) => {
                 <span className="font-medium text-[#4B5563]">Split Method</span>
                 <Accordion items={splitMethods} />
             </div>
-        </ButtonViewLayout >
+        </ButtonViewLayout>
     )
 }
 export default CreateExpensePage;

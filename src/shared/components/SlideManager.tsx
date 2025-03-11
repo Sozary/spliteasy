@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useParams, useLocation } from 'react-router-dom';
 import { useSlide } from '../context/SlideContext';
 import GroupPage from '../../features/group/pages/GroupPage';
@@ -9,9 +9,45 @@ export const SlideManager: React.FC = () => {
     const { groupId } = useParams<{ groupId?: string }>();
     const location = useLocation();
     const { slides, pushSlide, clearSlides } = useSlide();
+    const [directLoadHandled, setDirectLoadHandled] = useState(false);
 
-    // Handle URL-driven slides
+    // Detect direct URL loads
+    const isDirectLoad = document.referrer === '';
+
+    // Handle direct loads of expense create page
     useEffect(() => {
+        if (directLoadHandled) return;
+
+        const path = location.pathname;
+        const isExpenseCreate = path.match(/^\/groups\/([^/]+)\/expenses\/create$/);
+
+        if (isDirectLoad && isExpenseCreate && groupId) {
+            console.log("Handling direct load of expense create page with groupId:", groupId);
+
+            // Clear any existing slides
+            clearSlides();
+
+            // Create the parent group slide first
+            const groupPath = `/groups/${groupId}`;
+
+            pushSlide({
+                component: <GroupPage groupId={groupId} />,
+                path: groupPath,
+                animationType: 'slide',
+                returnTo: '/groups'
+            });
+
+            // Mark as handled to prevent re-execution
+            setDirectLoadHandled(true);
+        } else if (!directLoadHandled) {
+            setDirectLoadHandled(true);
+        }
+    }, [groupId, location.pathname, isDirectLoad, clearSlides, pushSlide, directLoadHandled]);
+
+    // Handle normal navigation
+    useEffect(() => {
+        if (!directLoadHandled) return;
+
         const path = location.pathname;
 
         // Skip if this path already has a slide
@@ -41,14 +77,14 @@ export const SlideManager: React.FC = () => {
         // Create expense page within a group
         else if (groupId && path.match(/^\/groups\/[^/]+\/expenses\/create$/)) {
             pushSlide({
-                component: <CreateExpensePage />,
+                component: <CreateExpensePage groupId={groupId} />,
                 path,
                 animationType: 'scale',
                 returnTo: `/groups/${groupId}`
             });
         }
 
-    }, [location.pathname, groupId, slides, pushSlide]);
+    }, [location.pathname, groupId, slides, pushSlide, directLoadHandled]);
 
     // Clear slides when going to a path that doesn't match any slide pattern
     useEffect(() => {

@@ -2,7 +2,7 @@ import toast from "react-hot-toast";
 import { AxiosError } from "axios";
 
 interface ApiError {
-	message: string;
+	Message: string;
 	code: string;
 	details?: Record<string, unknown>;
 }
@@ -36,6 +36,9 @@ export class ErrorHandler {
 				case 422:
 					this.handleValidationError(data);
 					break;
+				case 404:
+					this.handleNotFoundError(data);
+					break;
 				default:
 					this.handleGenericError(data);
 			}
@@ -47,11 +50,14 @@ export class ErrorHandler {
 	}
 
 	private static handleAuthError(error: ApiError) {
-		toast.error(error.message || "Authentication failed");
+		toast.error(error.Message || "Authentication failed");
 	}
 
 	private static handleForbiddenError(error: ApiError) {
-		toast.error(error.message || "Access denied");
+		toast.error(error.Message || "Access denied");
+	}
+	private static handleNotFoundError(error: ApiError) {
+		toast.error(error.Message || "Not found");
 	}
 
 	private static handleValidationError(error: ApiError) {
@@ -60,11 +66,11 @@ export class ErrorHandler {
 				toast.error(message as string);
 			});
 		} else {
-			toast.error(error.message || "Validation failed");
+			toast.error(error.Message || "Validation failed");
 		}
 	}
 
 	private static handleGenericError(error: ApiError) {
-		toast.error(error.message || "An unexpected error occurred");
+		toast.error(error.Message || "An unexpected error occurred");
 	}
 }

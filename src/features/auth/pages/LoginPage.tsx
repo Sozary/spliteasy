@@ -9,7 +9,8 @@ import Password from '../assets/Password';
 import LoginMessage from '../components/LoginMessage';
 import LoginSignUpMessage from '../components/LoginSignUpMessage';
 import { useAuth } from '../hooks/useAuth';
-
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faUser } from '@fortawesome/free-solid-svg-icons';
 
 export default function LoginPage() {
     const [username, setUsername] = useState('');
@@ -34,7 +35,7 @@ export default function LoginPage() {
             <LoginMessage />
             <form className="flex flex-col gap-5" onSubmit={handleSubmit}>
                 <Input
-                    logo={<User />}
+                    logo={<FontAwesomeIcon icon={faUser} />}
                     required
                     name="username"
                     label="Username"

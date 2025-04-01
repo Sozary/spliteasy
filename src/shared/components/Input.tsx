@@ -52,7 +52,7 @@ const Input = ({
                     placeholder={placeholder}
                     value={value}
                     onChange={onChange}
-                    className={`w-full p-2 focus:outline-none ${suffix ? "pl-10" : ""} ${className}`}
+                    className={`w-full p-2 focus:outline-none ${suffix || logo ? "pl-10" : ""} ${className}`}
                 />
             ) : (
                 <select

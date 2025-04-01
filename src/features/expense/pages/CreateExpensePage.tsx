@@ -29,6 +29,8 @@ const EquallySplitMethod = ({ totalAmount }: { totalAmount: number }) => {
     )
 }
 const PercentSplitMethod = ({ totalAmount }: { totalAmount: number }) => {
+    console.log(totalAmount);
+
     const [percentages, setPercentages] = useState<number[]>(Array.from({ length: 10 }, () => 0));
     return (
         <div className="flex flex-col gap-2">
@@ -55,6 +57,8 @@ const PercentSplitMethod = ({ totalAmount }: { totalAmount: number }) => {
 }
 
 const CustomSplitMethod = ({ totalAmount }: { totalAmount: number }) => {
+    console.log(totalAmount);
+
     return (
         <div className="flex flex-col gap-2">
             {Array.from({ length: 10 }).map((_, index) => (
@@ -75,6 +79,8 @@ const CustomSplitMethod = ({ totalAmount }: { totalAmount: number }) => {
     )
 }
 const AdjustmentMethod = ({ totalAmount }: { totalAmount: number }) => {
+    console.log(totalAmount);
+
     return (
         <div className="flex flex-col gap-2">
             {Array.from({ length: 10 }).map((_, index) => (

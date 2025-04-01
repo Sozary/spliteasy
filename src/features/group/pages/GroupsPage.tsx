@@ -2,12 +2,11 @@ import { Button } from "@/shared/components/Button";
 import Card from "@/shared/components/Card";
 import { GlobalViewLayout } from "@/shared/layouts/GlobalViewLayout";
 import { useEffect } from "react";
-import { useParams, useLocation, useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import { useSlideNavigation } from "@/shared/hooks/useSlideNavigation";
 import { SlideManager } from "@/shared/components/SlideManager";
 
 const GroupsPage = () => {
-    const { groupId } = useParams();
     const location = useLocation();
     const navigate = useNavigate();
     const { closeSlide, currentSlides } = useSlideNavigation();

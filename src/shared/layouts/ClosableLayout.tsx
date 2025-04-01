@@ -1,14 +1,18 @@
-import React from "react";
-import { ReactNode } from "react";
+import React, { ReactElement } from "react";
+
+interface ClosableComponentProps {
+    onClose: () => void;
+}
 
 interface ClosableLayoutProps {
-    children: ReactNode;
+    children: ReactElement<ClosableComponentProps> | ReactElement<ClosableComponentProps>[];
     onClose: () => void;
     className?: string;
 }
+
 export const ClosableLayout = ({ children, onClose, className }: ClosableLayoutProps) => {
     const childrenWithProps = React.Children.map(children, child => {
-        if (React.isValidElement(child)) {
+        if (React.isValidElement<ClosableComponentProps>(child)) {
             return React.cloneElement(child, { onClose });
         }
         return child;
@@ -18,5 +22,5 @@ export const ClosableLayout = ({ children, onClose, className }: ClosableLayoutP
         <div className={className}>
             {childrenWithProps}
         </div>
-    )
-}
+    );
+};

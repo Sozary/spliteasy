@@ -1,11 +1,13 @@
 import Card from "@/shared/components/Card";
 import { GlobalViewLayout } from "@/shared/layouts/GlobalViewLayout";
-import { useSlideNavigation } from "@/shared/hooks/useSlideNavigation";
+// import { useSlideNavigation } from "@/shared/hooks/useSlideNavigation";
 
 const DashboardPage = () => {
-    const { openSlide } = useSlideNavigation();
+    // const { openSlide } = useSlideNavigation();
 
     const handleExpenseClick = (expenseId: string) => {
+        console.log(expenseId);
+
         // openSlide(
         //     <ExpenseDetails expenseId={expenseId} />,
         //     `/expenses/${expenseId}`,

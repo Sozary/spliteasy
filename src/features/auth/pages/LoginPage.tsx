@@ -1,4 +1,3 @@
-import User from '@/shared/assets/User';
 import { Button } from '@/shared/components/Button';
 import Input from '@/shared/components/Input';
 import { AuthenticationLayout } from '@/shared/layouts/AuthenticationLayout';
